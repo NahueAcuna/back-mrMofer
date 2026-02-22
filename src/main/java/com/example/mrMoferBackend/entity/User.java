@@ -6,6 +6,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,5 +20,9 @@ public class User {
     private String email;
     private String phoneNumber;
     @OneToMany(mappedBy = "user")
-    private List<Reservation> reservations;
+    private List<Reservation> reservations =  new ArrayList<>();
+
+    public void addReservation(Reservation reservation) {
+        this.reservations.add(reservation);
+    }
 }

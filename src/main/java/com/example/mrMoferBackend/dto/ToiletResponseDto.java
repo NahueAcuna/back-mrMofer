@@ -2,6 +2,9 @@ package com.example.mrMoferBackend.dto;
 
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 public class ToiletResponseDto {
     private long id;
@@ -11,4 +14,5 @@ public class ToiletResponseDto {
     private double price;
     private boolean active;
     private int stock;
+    private List<String> qualities = new ArrayList<>();
 }

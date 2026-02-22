@@ -1,24 +1,21 @@
-package com.example.mrMoferBackend.entity;
+package com.example.mrMoferBackend.dto;
 
+import com.example.mrMoferBackend.entity.ReservationDetails;
+import com.example.mrMoferBackend.entity.User;
 import com.example.mrMoferBackend.enums.ReservationStatus;
-import jakarta.persistence.*;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
 @Data
-public class Reservation {
-
-    @Id
-    @GeneratedValue
+public class ReservationResponseDto {
     private Long id;
-    @ManyToOne
     private User user;
-    @OneToMany(mappedBy = "reservation")
-    private List<ReservationDetails> reservationDetails =  new ArrayList<>();
+    private List<ReservationDetailsDto> reservationDetails =  new ArrayList<>();
     private LocalDate createdDate;
     private LocalDate startDate;
     private LocalDate endDate;

@@ -2,6 +2,9 @@ package com.example.mrMoferBackend.dto;
 
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 public class ToiletRequestDto {
     private String name;
@@ -10,4 +13,5 @@ public class ToiletRequestDto {
     private double price;
     private boolean active;
     private int stock;
+    private List<String> qualities = new ArrayList<>();
 }

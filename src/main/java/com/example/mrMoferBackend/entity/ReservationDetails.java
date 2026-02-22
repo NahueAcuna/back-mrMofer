@@ -16,7 +16,5 @@ public class ReservationDetails {
     private Toilet toilet;
     @ManyToOne
     private Reservation reservation;
-    private int quanty;
-    private double totalPrice;
-
+    private int quantity;
 }

@@ -2,8 +2,10 @@ package com.example.mrMoferBackend.controller;
 
 import com.example.mrMoferBackend.dto.ToiletRequestDto;
 import com.example.mrMoferBackend.dto.ToiletResponseDto;
+import com.example.mrMoferBackend.entity.Toilet;
 import com.example.mrMoferBackend.service.ToiletService;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -35,8 +37,35 @@ public class ToiletController {
         return ResponseEntity.ok(allToilets);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<?> putToilet(){
+    public ResponseEntity<?> putToilet(@PathVariable long id,@RequestBody ToiletRequestDto toiletRequestDto){
 
+        try{
+            ToiletResponseDto toiletResponseDto = toiletService.putToilet(id,toiletRequestDto);
+            return ResponseEntity.ok(toiletResponseDto);
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getById(@PathVariable long id){
+        try{
+
+            ToiletResponseDto toiletResponseDto = toiletService.getById(id);
+            return ResponseEntity.ok(toiletResponseDto);
+
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteToilet(@PathVariable long id){
+        try{
+            ToiletResponseDto toiletResponseDto = toiletService.deleteToilet(id);
+            return ResponseEntity.ok(toiletResponseDto);
+
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
 }

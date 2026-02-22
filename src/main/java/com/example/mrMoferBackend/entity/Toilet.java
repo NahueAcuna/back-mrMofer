@@ -3,6 +3,9 @@ package com.example.mrMoferBackend.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 public class Toilet {
@@ -16,5 +19,7 @@ public class Toilet {
     private double price;
     private boolean active;
     private int stock;
+    @ElementCollection
+    private List<String> qualities =  new ArrayList<>();
 
 }

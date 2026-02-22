@@ -39,7 +39,21 @@ public class ToiletService {
 
         return totalToiletsResponseDto;
     }
-    public void putToilet(ToiletRequestDto toiletRequestDto){
+    public ToiletResponseDto putToilet(long id, ToiletRequestDto toiletRequestDto){
+        Toilet toilet = toiletRepository.findById(id).orElseThrow(() -> new RuntimeException("No existe ningun baño con esa id"));
 
+        toiletMapper.updateEntityFromDto(toiletRequestDto,toilet);
+        toiletRepository.save(toilet);
+
+        return toiletMapper.toResponseDto(toilet);
+    }
+    public ToiletResponseDto getById(long id){
+        Toilet toilet = toiletRepository.findById(id).orElseThrow(() -> new RuntimeException("No existe ningun baño con esa id"));
+        return toiletMapper.toResponseDto(toilet);
+    }
+    public ToiletResponseDto deleteToilet(long id){
+        Toilet toilet = toiletRepository.findById(id).orElseThrow(() ->new RuntimeException("No existe un baño con ese id"));
+        toiletRepository.delete(toilet);
+        return toiletMapper.toResponseDto(toilet);
     }
 }

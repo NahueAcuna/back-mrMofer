@@ -3,7 +3,7 @@ package com.example.mrMoferBackend.dto.dashboard;
 import lombok.Data;
 
 @Data
-public class MonthlyTrendDto {
+public class MonthlyReservationsDto {
     private Integer month;
-    private Double revenue;
+    private Integer reservations;
 }

@@ -38,13 +38,19 @@ public class ReservationService {
         reservation.setStatus(ReservationStatus.ACTIVE);
         reservation.setCreatedDate(LocalDate.now());
 
-        User user = new User();
-        user.setName(reservationRequestDto.getClientName());
-        user.setPhoneNumber(reservationRequestDto.getPhoneNumber());
-        user.addReservation(reservation);
-        User userSaved = userRepository.save(user);
+        User user = userRepository.findByPhoneNumber(reservationRequestDto.getPhoneNumber());
 
-        reservation.setUser(userSaved);
+        if (user == null) {
+            User newUser = new User();
+            newUser.setName(reservationRequestDto.getClientName());
+            newUser.setPhoneNumber(reservationRequestDto.getPhoneNumber());
+            newUser.addReservation(reservation);
+            User userSaved = userRepository.save(newUser);
+            reservation.setUser(userSaved);
+        }else {
+            reservation.setUser(user);
+        }
+
         Reservation savedReservation = reservationRepository.save(reservation);
 
 
